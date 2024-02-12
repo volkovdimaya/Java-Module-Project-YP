@@ -6,34 +6,26 @@ public class Main {
 
         System.out.println("Добрый день");
         Scanner scaner = new Scanner(System.in);
-        int input=0;
+        int input = 0;
 
-        while (true)
-        {
+        while (true) {
             System.out.println("На сколько человек необходимо разделить счёт?");
 
-            try {
+            if (scaner.hasNextInt()) {
                 input = scaner.nextInt();
 
-                if(input == 1)
-                {
+                if (input == 1) {
                     System.out.println("Нет смысла ничего считать и делить");
-                }
-                else if(input < 1)
-                {
+                } else if (input < 1) {
                     System.out.println("Это некорректное значение для подсчёта");
-                }
-                else if(input > 1)
-                {
+                } else if (input > 1) {
                     Calculator cal = new Calculator();
                     cal.AddProduct();
                     cal.ShowProducts();
                     cal.ShowResult(input);
                     break;
                 }
-            }
-            catch (Exception e)
-            {
+            } else {
                 System.out.println("Ошибка, попробуйте еще раз");
                 scaner.nextLine();
             }
@@ -42,8 +34,6 @@ public class Main {
         }
 
     }
-
-
 
 
 }

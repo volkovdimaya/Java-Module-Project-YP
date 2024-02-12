@@ -7,20 +7,18 @@ public class Calculator {
     ArrayList<Product> products = new ArrayList<>();
 
 
-    private String IputName()
-    {
+    private String IputName() {
         System.out.println("Введите название товара");
         String name = scaner.next();
         return name;
     }
-    private double InputCost()
-    {
+
+    private double InputCost() {
         while (true) {
             System.out.println("Введите стоимость");
             try {
                 double cost = scaner.nextDouble();
-                if (cost <= 0)
-                {
+                if (cost <= 0) {
                     System.out.println("Стоимость не может быть меньше 0");
                     scaner.nextLine();
                     continue;
@@ -35,10 +33,8 @@ public class Calculator {
         }
     }
 
-    public void AddProduct()
-    {
-        while (true)
-        {
+    public void AddProduct() {
+        while (true) {
             System.out.println("Добавление товара в калькулятор");
 
             Product product = new Product(IputName(), InputCost());
@@ -50,29 +46,25 @@ public class Calculator {
             System.out.println("Ввести команду \"Завершить\" для того, чтоб завершить процесс добавления товаров");
 
             String comand = scaner.next();
-            if(comand.equalsIgnoreCase("Завершить"))
-            {
+            if (comand.equalsIgnoreCase("Завершить")) {
                 break;
             }
         }
 
     }
 
-    public void ShowProducts()
-    {
+    public void ShowProducts() {
         FormatterRub f = new FormatterRub();//для форматирования окончания рубля
         System.out.println("Добавленные товары:");
-        for (Product product : products)
-        {
+        for (Product product : products) {
             System.out.println("Товар: " + product.name + " цена: " + product.cost + " " + f.correctEnding(product.cost));
         }
     }
 
-    public void ShowResult(int countHuman)
-    {
+    public void ShowResult(int countHuman) {
         FormatterRub f = new FormatterRub();
         System.out.println("Всего товаров на сумму: " + sum + " " + f.correctEnding(sum));
-        double result = sum/countHuman;
+        double result = sum / countHuman;
 
 
         String text = "Каждый должен заплатить: %.2f %s";
