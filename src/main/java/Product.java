@@ -6,4 +6,19 @@ public class Product {
         this.name = name;
         this.cost = cost;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return name.equals(product.name) && cost == product.cost;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name == null ? 0 : name.hashCode();
+        result = result + (int) cost;
+        return result;
+    }
 }

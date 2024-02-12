@@ -2,21 +2,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Calculator {
-    double sum;
-    Scanner scaner = new Scanner(System.in);
-    ArrayList<Product> products = new ArrayList<>();
-
-
-    private String IputName() {
+    private double sum;
+    private Scanner scaner = new Scanner(System.in);
+    private ArrayList<Product> products = new ArrayList<>();
+    private String iputName() {
         System.out.println("Введите название товара");
         String name = scaner.next();
         return name;
     }
 
-    private double InputCost() {
+    private double inputCost() {
         while (true) {
             System.out.println("Введите стоимость");
-            try {
+            if (scaner.hasNextDouble()) {
                 double cost = scaner.nextDouble();
                 if (cost <= 0) {
                     System.out.println("Стоимость не может быть меньше 0");
@@ -24,24 +22,20 @@ public class Calculator {
                     continue;
                 }
                 return cost;
-
-
-            } catch (Exception e) {
+            } else {
                 System.out.println("Ошибка, попробуйте еще раз");
                 scaner.nextLine();
             }
         }
     }
 
-    public void AddProduct() {
+    public void addProduct() {
         while (true) {
             System.out.println("Добавление товара в калькулятор");
-
-            Product product = new Product(IputName(), InputCost());
+            Product product = new Product(iputName(), inputCost());
             products.add(product);
             sum += product.cost;
-
-            System.out.println("Товар " + product.name + " успешно добавлен!");
+            System.out.println(String.format("Товар %s успешно добавлен!", product.name));
             System.out.println("Продолжить добовление товара?");
             System.out.println("Ввести команду \"Завершить\" для того, чтоб завершить процесс добавления товаров");
 
@@ -50,26 +44,24 @@ public class Calculator {
                 break;
             }
         }
-
     }
 
-    public void ShowProducts() {
-        FormatterRub f = new FormatterRub();//для форматирования окончания рубля
+    public void showProducts() {
+        FormatterRub formatterRub = new FormatterRub();//для форматирования окончания рубля
         System.out.println("Добавленные товары:");
+        String message = "Товар: %s цена: %.2f %s";
         for (Product product : products) {
-            System.out.println("Товар: " + product.name + " цена: " + product.cost + " " + f.correctEnding(product.cost));
+            System.out.println(String.format(message, product.name, product.cost, formatterRub.correctEnding(product.cost)));
         }
     }
 
-    public void ShowResult(int countHuman) {
-        FormatterRub f = new FormatterRub();
-        System.out.println("Всего товаров на сумму: " + sum + " " + f.correctEnding(sum));
+    public void showResult(int countHuman) {
+        FormatterRub formatterRub = new FormatterRub();
+        System.out.println(String.format("Всего товаров на сумму:  %.2f %s", sum,  formatterRub.correctEnding(sum)));
         double result = sum / countHuman;
 
-
         String text = "Каждый должен заплатить: %.2f %s";
-
-        System.out.println(String.format(text, result, f.correctEnding(result)));
+        System.out.println(String.format(text, result, formatterRub.correctEnding(result)));
     }
 
 }
