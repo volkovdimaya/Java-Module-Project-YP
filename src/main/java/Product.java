@@ -12,13 +12,12 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return name.equals(product.name) && cost == product.cost;
+        return name.equals(product.name);
     }
 
     @Override
     public int hashCode() {
         int result = name == null ? 0 : name.hashCode();
-        result = result + (int) cost;
         return result;
     }
 }
